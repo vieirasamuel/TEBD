@@ -26,7 +26,7 @@ public class PedidoBD{
 /**
 * Metodo que grava um pedido no Banco de Dados
 */	
-	public void AdicionarPedidoBD(Pedido pedido_)throws Exception{
+	public void AdicionarPedidoBD(PedidoOld pedido_)throws Exception{
 	  PreparedStatement Stmt;
       Stmt = conexao.getConexao().prepareStatement(
       "INSERT INTO PEDIDO (ID,DESCRICAO) VALUES (?,?)");
@@ -55,7 +55,7 @@ public class PedidoBD{
 *
 */
 	
-public Pedido ConsultarPedidoBD(Integer pedido_id)throws Exception{
+public PedidoOld ConsultarPedidoBD(Integer pedido_id)throws Exception{
 		
 	  
    
@@ -67,7 +67,7 @@ public Pedido ConsultarPedidoBD(Integer pedido_id)throws Exception{
       rs = Stmt.executeQuery();
       if (!(rs.next())) return null;
       
-      Pedido p = new Pedido(pedido_id,rs.getString("DESCRICAO"));
+      PedidoOld p = new PedidoOld(pedido_id,rs.getString("DESCRICAO"));
       
       Stmt.close();
       rs.close();
