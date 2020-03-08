@@ -5,6 +5,7 @@ class Participante extends Model {
     super.init({
       nome_participante: DataTypes.STRING,
       cpf: DataTypes.STRING,
+      endereco: DataTypes.STRING,
       telefone: DataTypes.STRING,
       email: DataTypes.STRING,
       empresa: DataTypes.STRING,
@@ -20,7 +21,7 @@ class Participante extends Model {
 
   static associate(models) {
     this.belongsTo(models.Congresso, { foreignKey: 'congresso_id', as: 'congresso' });
-    this.hasMany(models.Avaliacao, { foreignKey: 'participante_id', as: 'participante' });
+    this.hasMany(models.Avaliacao, { foreignKey: 'participante_id', as: 'participantes' });
     this.belongsToMany(models.Artigo, { foreignKey: 'participante_id', through: 'autor', as: 'autores' });
   }
 }
