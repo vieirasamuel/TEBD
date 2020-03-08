@@ -1,7 +1,7 @@
 ---
 title: "Instruções de Criação de Posts no Hugo"
 date: 2020-03-08T15:19:22-03:00
-draft: true
+draft: false
 ---
 
 ## Como começar

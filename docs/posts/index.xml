@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tópicos Especiais em Banco de Dados</title>
-    <link>https://vieirasamuel.github.io/TEBD/</link>
-    <description>Recent content on Tópicos Especiais em Banco de Dados</description>
+    <title>Posts on Tópicos Especiais em Banco de Dados</title>
+    <link>https://vieirasamuel.github.io/TEBD/posts/</link>
+    <description>Recent content in Posts on Tópicos Especiais em Banco de Dados</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 08 Mar 2020 15:19:22 -0300</lastBuildDate>
     
-	<atom:link href="https://vieirasamuel.github.io/TEBD/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://vieirasamuel.github.io/TEBD/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
