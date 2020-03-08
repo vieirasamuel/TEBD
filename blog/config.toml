@@ -1,0 +1,4 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "Tópicos Especiais em Banco de Dados"
+theme = "tale"
