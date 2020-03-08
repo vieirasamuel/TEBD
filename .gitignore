@@ -1,0 +1,8 @@
+# Dependency directories
+node_modules/
+
+# Database key
+keys.js
+
+# Yarn lock
+yarn.lock
