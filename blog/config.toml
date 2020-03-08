@@ -1,4 +1,5 @@
-baseURL = "http://example.org/"
+baseURL = "https://vieirasamuel.github.io/TEBD/"
 languageCode = "en-us"
 title = "Tópicos Especiais em Banco de Dados"
 theme = "tale"
+publishDir = "../docs"
