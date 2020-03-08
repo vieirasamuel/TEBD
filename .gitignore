@@ -2,7 +2,7 @@
 node_modules/
 
 # Database key
-gerador/keys.js
+../gerador/keys.js
 
 # Yarn lock
 yarn.lock
