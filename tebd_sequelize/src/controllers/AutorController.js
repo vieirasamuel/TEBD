@@ -1,5 +1,7 @@
 const Artigo = require('../models/Artigo');
 const Participante = require('../models/Participante');
+const Utils = require('../utils');
+const sequelize = require('../database')
 
 module.exports = {
 
@@ -32,5 +34,33 @@ module.exports = {
 
     return res.json(participante);
 
+  },
+
+  async createAutores(req, res){
+    const participantes = await Participante.findAll();
+    const artigos = await Artigo.findAll();
+
+    try{
+      await sequelize.transaction(async (t) => {
+  
+        for (let i = 0; i < 10000; i++) {      
+          let participante_escolhido = participantes[Utils.getRandomInt(0,participantes.length-1)];
+          let artigo_escolhido = artigos[Utils.getRandomInt(0,artigos.length-1)];
+    
+          let artigo = await Artigo.findByPk(artigo_escolhido.id);
+          let participante = await Participante.findByPk(participante_escolhido.id);
+    
+          await artigo.addParticipante(participante, {transaction: t});
+        }
+      });
+      return res.json({msg: "Autores criados"});
+    } catch (error) {
+      console.log(error.original.sqlMessage);
+      return res.status(500).json({msg: "Erro"});
+    }
+
+
   }
+
+
 }
