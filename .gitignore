@@ -25,3 +25,12 @@ lerna-debug.log*
 ## Java project
 /hibernate/bin/
 /hibernate/target/
+
+# Eclipse
+/hibernate/.classpath
+/hibernate/.project
+/hibernate/.settings/
+
+# Maven
+/hibernate/log/
+/hibernate/target/
