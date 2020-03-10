@@ -23,14 +23,14 @@ lerna-debug.log*
 !.vscode/extensions.json
 
 ## Java project
-/hibernate/bin/
-/hibernate/target/
+hibernate/bin/
+hibernate/target/
 
 # Eclipse
-/hibernate/.classpath
-/hibernate/.project
-/hibernate/.settings/
+.classpath/
+.project/
+.settings/
 
 # Maven
-/hibernate/log/
-/hibernate/target/
+log/
+target/
