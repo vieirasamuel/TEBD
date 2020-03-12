@@ -1,4 +1,4 @@
-package nivelamento1;
+package view;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -9,8 +9,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import classe.Aluno;
-import classe.Nota;
+
+import controller.ClasseBD;
+import model.Aluno;
+import model.Nota;
 
 public class ColecaoClasse {
 	

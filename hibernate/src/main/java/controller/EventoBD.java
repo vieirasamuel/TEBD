@@ -1,4 +1,4 @@
-package nivelamento1;
+package controller;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -8,9 +8,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import classe.Artigo;
-import classe.Congresso;
-import classe.Participante;
+import model.Artigo;
+import model.Congresso;
+import model.Participante;
+import view.Colecao;
 
 public class EventoBD {
 	
@@ -24,7 +25,7 @@ public class EventoBD {
 			congresso = new Congresso(nome);
 			
 			Colecao colecao = new Colecao();
-			participantes = colecao.addParticipante(congresso);
+			participantes = colecao.addParticipante(factory, congresso);
 			congresso.setParticipante(participantes);
 			
 			session.save(congresso);

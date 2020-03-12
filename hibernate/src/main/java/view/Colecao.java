@@ -1,4 +1,4 @@
-package nivelamento1;
+package view;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -11,11 +11,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import classe.Artigo;
-import classe.Autor;
-import classe.Congresso;
-import classe.Nota;
-import classe.Participante;
+import controller.EventoBD;
+import model.Artigo;
+import model.Autor;
+import model.Congresso;
+import model.Nota;
+import model.Participante;
 
 public class Colecao {
 

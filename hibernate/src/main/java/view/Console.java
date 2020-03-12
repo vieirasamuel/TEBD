@@ -1,4 +1,4 @@
-package nivelamento1;
+package view;
 /**
    An easy interface to read numbers and strings from
    standard input

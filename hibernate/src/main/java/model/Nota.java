@@ -1,4 +1,4 @@
-package classe;
+package model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +9,9 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import model.Aluno;
+
 import javax.persistence.Column;
-import classe.Aluno;
 
 @Entity
 @Table( name = "NOTA" )
