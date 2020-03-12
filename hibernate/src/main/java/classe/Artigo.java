@@ -25,9 +25,6 @@ public class Artigo {
 	@Column(name = "resumo")
 	private String resumo;
 	
-	//@OneToOne
-	//private Autor autor;
-	
 	public Artigo(String titulo, String resumo) {
 		this.titulo = titulo;
 		this.resumo = resumo;

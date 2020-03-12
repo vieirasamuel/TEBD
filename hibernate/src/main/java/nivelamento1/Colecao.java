@@ -11,6 +11,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import classe.Artigo;
+import classe.Autor;
 import classe.Congresso;
 import classe.Nota;
 import classe.Participante;
@@ -26,8 +28,8 @@ public class Colecao {
 		System.out.println("Menu de Opcoes:");
 		System.out.println("-------------------");
 		System.out.println("1. Adicionar Congresso");
-		System.out.println("2. Consultar Congresso");
-		System.out.println("3. Remover Congresso");
+		//System.out.println("2. Consultar Congresso");
+		//System.out.println("3. Remover Congresso");
 		//System.out.println("4. Media geral");
 		System.out.println("5. Sair do Programa");
 		System.out.println("-------------------");
@@ -49,8 +51,8 @@ public class Colecao {
 		} while(opcao.compareTo("S") == 0);
 	}
 	
-	public Set<Participante> addParticipante(Congresso congresso){
-		String opcao;
+	public Set<Participante> addParticipante(SessionFactory factory, Congresso congresso) throws Exception{
+		String opcao, opcao2;
 		Set<Participante> participantes = new HashSet<Participante>();
 		do
 		{
@@ -85,10 +87,45 @@ public class Colecao {
 														 numeroCartao, vencimentoCartao,
 														 bandeiraCartao, avaliador, congresso);
 		    participantes.add(participante);
-			System.out.print("Deseja Adicionar mais um participante? [S|N]: ");
+		    System.out.print("O participante é um autor? [S|N]: ");
 			opcao = Console.readLine();
-		} while (opcao.compareTo("S") == 0);
+			System.out.println(opcao);
+			if(opcao.compareTo("S") == 0) {
+				System.out.println("ENTROU ADD AUTOR");
+				participante.setAutor(addAutor(factory, participante));
+			}
+			System.out.print("Deseja Adicionar mais um participante? [S|N]: ");
+			opcao2 = Console.readLine();
+		} while (opcao2.compareTo("S") == 0);
 		return participantes;
+	}
+	
+	public Set<Autor> addAutor(SessionFactory factory, Participante participante) throws Exception {
+		String opcao;
+		Set<Autor> autores = new HashSet<Autor>();
+		do {
+			Artigo artigo = addArtigo(factory);
+			Autor autor = new Autor(participante, artigo);
+			autores.add(autor);
+			System.out.print("Quer adicionar mais um artigo? [S|N]: ");
+			opcao = Console.readLine();
+		} while(opcao.compareTo("S") == 0);
+		return autores;
+	}
+	
+	public Artigo addArtigo(SessionFactory factory) throws Exception {
+		Artigo artigo = new Artigo();
+		System.out.print("Cadastro de Artigo:");
+		System.out.print("-------------------");
+		System.out.print("Titulo:");
+		String titulo = Console.readLine();
+		System.out.print("Resumo:");
+		String resumo = Console.readLine();
+		artigo.setTitulo(titulo);
+		artigo.setResumo(resumo);
+		EventoBD evento = new EventoBD();
+		evento.addArtigo(Colecao.factory, titulo, resumo);
+		return artigo;
 	}
 	
 	public static void main (String args[]) throws Exception {
