@@ -1,14 +1,10 @@
 package classe;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -29,8 +25,8 @@ public class Artigo {
 	@Column(name = "resumo")
 	private String resumo;
 	
-	//@ManyToOne(mappedBy= "autor", targetEntity = Autor.class, fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	//private Set<Autor> autor;
+	//@OneToOne
+	//private Autor autor;
 	
 	public Artigo(String titulo, String resumo) {
 		this.titulo = titulo;
@@ -63,5 +59,13 @@ public class Artigo {
 	public void setResumo(String resumo) {
 		this.resumo = resumo;
 	}
+
+//	public Autor getAutor() {
+//		return autor;
+//	}
+//
+//	public void setAutor(Autor autor) {
+//		this.autor = autor;
+//	}
 	
 }

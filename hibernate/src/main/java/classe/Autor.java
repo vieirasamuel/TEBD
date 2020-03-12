@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -20,15 +21,15 @@ public class Autor {
 	@Column(name = "idautor")
 	private int id;
 	
-	@ManyToOne
+	@OneToOne
 	@JoinColumn(name = "fk_participante", nullable = false)
 	private Participante participante;
 	
-	@ManyToOne
-	@Column(name = "fk_artigo")
-	private int artigo;
+	@OneToOne
+	@JoinColumn(name = "fk_artigo", nullable = false)
+	private Artigo artigo;
 	
-	public Autor(Participante participante, int artigo) {
+	public Autor(Participante participante, Artigo artigo) {
 		this.participante = participante;
 		this.artigo = artigo;
 	}
@@ -52,11 +53,11 @@ public class Autor {
 		this.participante = participante;
 	}
 
-	public int getArtigo() {
+	public Artigo getArtigo() {
 		return artigo;
 	}
 
-	public void setArtigo(int artigo) {
+	public void setArtigo(Artigo artigo) {
 		this.artigo = artigo;
 	}
 	

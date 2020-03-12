@@ -1,14 +1,11 @@
 package classe;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -20,7 +17,7 @@ public class Participante {
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
-	@Column(name = "idiparticipante")
+	@Column(name = "idparticipante")
 	private int id;
 	
 	@Column(name = "nome")
@@ -57,13 +54,13 @@ public class Participante {
 	@JoinColumn(name = "fk_congresso", nullable = false)
 	private Congresso congresso;
 	
-	@OneToMany(mappedBy = "participante", targetEntity = Autor.class)
-	private Set<Autor> autor;
+//	@OneToMany(mappedBy = "participante", targetEntity = Autor.class)
+//	private Set<Autor> autor;
 	
 	public Participante(String nome, String cpf, String endereco,
 						String telefone, String email, String empresa,
 						String numeroCartao, String vencimentoCartao,
-						String bandeiraCartao, boolean avaliador) {
+						String bandeiraCartao, boolean avaliador, Congresso congresso) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.endereco = endereco;
@@ -74,6 +71,7 @@ public class Participante {
 		this.vencimentoCartao = vencimentoCartao;
 		this.bandeiraCartao = bandeiraCartao;
 		this.avaliador = avaliador;
+		this.congresso = congresso;
 	}
 	
 	public Participante() {
