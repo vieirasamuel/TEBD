@@ -15,12 +15,13 @@ import controller.EventoBD;
 import model.Artigo;
 import model.Autor;
 import model.Congresso;
+import model.HibernateUtil;
 import model.Nota;
 import model.Participante;
 
 public class Colecao {
 
-	private static SessionFactory factory;
+	//public static SessionFactory factory;
 	public static final int ADICIONAR = 1;
 	public static final int CONSULTAR = 2;
 	public static final int REMOVER = 3;
@@ -38,7 +39,7 @@ public class Colecao {
 		return opcao;
 	}
 	
-	public void addCongresso() throws Exception {
+	public void addCongresso(Session session) throws Exception {
 		String opcao;
 		do {
 			System.out.println("Adicionar Congresso:");
@@ -46,13 +47,13 @@ public class Colecao {
 			System.out.print("Nome do Congresso:");
 			String nome = Console.readLine();
 			EventoBD evento = new EventoBD(); //EventoBD
-			evento.addCongresso(Colecao.factory, nome);
+			evento.addCongresso(session, nome);
 			System.out.print("Deseja Adicionar mais um congresso? [S|N]: ");
 			opcao = Console.readLine();
 		} while(opcao.compareTo("S") == 0);
 	}
 	
-	public Set<Participante> addParticipante(SessionFactory factory, Congresso congresso) throws Exception{
+	public Set<Participante> addParticipante(Session session, Congresso congresso) throws Exception{
 		String opcao, opcao2;
 		Set<Participante> participantes = new HashSet<Participante>();
 		do
@@ -88,12 +89,13 @@ public class Colecao {
 														 numeroCartao, vencimentoCartao,
 														 bandeiraCartao, avaliador, congresso);
 		    participantes.add(participante);
+		    EventoBD evento = new EventoBD(); //EventoBD
+			evento.addParticipante(participante);
 		    System.out.print("O participante é um autor? [S|N]: ");
 			opcao = Console.readLine();
-			System.out.println(opcao);
 			if(opcao.compareTo("S") == 0) {
-				System.out.println("ENTROU ADD AUTOR");
-				participante.setAutor(addAutor(factory, participante));
+				Artigo artigo = addArtigo(session);
+				participante.setAutor(addAutor(session, participante, artigo));
 			}
 			System.out.print("Deseja Adicionar mais um participante? [S|N]: ");
 			opcao2 = Console.readLine();
@@ -101,12 +103,14 @@ public class Colecao {
 		return participantes;
 	}
 	
-	public Set<Autor> addAutor(SessionFactory factory, Participante participante) throws Exception {
+	public Set<Autor> addAutor(Session session, Participante participante, Artigo artigo) throws Exception {
 		String opcao;
 		Set<Autor> autores = new HashSet<Autor>();
 		do {
-			Artigo artigo = addArtigo(factory);
+			
 			Autor autor = new Autor(participante, artigo);
+			EventoBD evento = new EventoBD();
+			evento.addAutor(session, autor);
 			autores.add(autor);
 			System.out.print("Quer adicionar mais um artigo? [S|N]: ");
 			opcao = Console.readLine();
@@ -114,7 +118,7 @@ public class Colecao {
 		return autores;
 	}
 	
-	public Artigo addArtigo(SessionFactory factory) throws Exception {
+	public Artigo addArtigo(Session session) throws Exception {
 		Artigo artigo = new Artigo();
 		System.out.print("Cadastro de Artigo:");
 		System.out.print("-------------------");
@@ -124,24 +128,25 @@ public class Colecao {
 		String resumo = Console.readLine();
 		artigo.setTitulo(titulo);
 		artigo.setResumo(resumo);
-		EventoBD evento = new EventoBD();
-		evento.addArtigo(Colecao.factory, titulo, resumo);
+		//EventoBD evento = new EventoBD();
+		//evento.addArtigo(session, titulo, resumo);
 		return artigo;
 	}
 	
 	public static void main (String args[]) throws Exception {
-		try {
-			factory = new Configuration().configure().buildSessionFactory();
-		} catch (Throwable ex) {
-			System.err.println("Failed to create sessionFactory object." + ex);
-			throw new ExceptionInInitializerError(ex); 
-		}
+//		try {
+//			factory = new Configuration().configure().buildSessionFactory();
+//		} catch (Throwable ex) {
+//			System.err.println("Failed to create sessionFactory object." + ex);
+//			throw new ExceptionInInitializerError(ex); 
+//		}
+		Session session = HibernateUtil.getSession();
 		try {
 			Colecao ce = new Colecao();
 			int opcao;
 			while((opcao = ce.criaMenuPrincipal()) != 5){
 				if(opcao == Colecao.ADICIONAR) {
-					ce.addCongresso();
+					ce.addCongresso(session);
 				} else System.out.println("Escolha uma opcao correta.");
 			}
 		} catch (Exception e) {

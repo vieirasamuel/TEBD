@@ -16,9 +16,9 @@
         
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://127.0.0.1:3306/dbateste?useTimezone=true&amp;serverTimezone=UTC</property>
-        <property name="connection.username">nome-do-banco</property>
-        <property name="connection.password">sua-senha</property>
+        <property name="connection.url">jdbc:mysql://127.0.0.1:3306/hibernatebd?useTimezone=true&amp;serverTimezone=UTC</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">Samuel123@</property>
 
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>
@@ -30,14 +30,17 @@
         <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
 
         <!-- Echo all executed SQL to stdout -->
-        <property name="show_sql">false</property>
+        <property name="show_sql">true</property>
 
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">update</property>
 
         <!-- Names the annotated entity class -->
-        <mapping class="classe.Aluno"/>
-        <mapping class="classe.Nota"/>
+        <mapping class="model.Artigo"/>
+        <mapping class="model.Autor"/>
+        <mapping class="model.Avaliacao"/>
+        <mapping class="model.Congresso"/>
+        <mapping class="model.Participante"/>
         
 
     </session-factory>

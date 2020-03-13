@@ -1,7 +1,9 @@
 package model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -21,11 +23,11 @@ public class Autor {
 	@Column(name = "idautor")
 	private int id;
 	
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "fk_participante", nullable = false)
 	private Participante participante;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name = "fk_artigo", nullable = false)
 	private Artigo artigo;
 	

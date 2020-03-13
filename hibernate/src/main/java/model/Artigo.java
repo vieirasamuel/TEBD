@@ -1,7 +1,9 @@
 package model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -24,6 +26,9 @@ public class Artigo {
 	
 	@Column(name = "resumo")
 	private String resumo;
+	
+	@OneToOne(mappedBy="artigo", targetEntity=Autor.class)
+	private Autor autor;
 	
 	public Artigo(String titulo, String resumo) {
 		this.titulo = titulo;
