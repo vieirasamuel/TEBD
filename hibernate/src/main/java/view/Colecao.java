@@ -129,6 +129,7 @@ public class Colecao {
 					ce.addCongresso(session);
 				} else System.out.println("Escolha uma opcao correta.");
 			}
+			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
