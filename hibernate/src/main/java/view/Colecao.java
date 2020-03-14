@@ -94,17 +94,10 @@ public class Colecao {
 	}
 	
 	public Set<Autor> addAutor(Session session, Participante participante, Artigo artigo) throws Exception {
-		String opcao;
 		Set<Autor> autores = new HashSet<Autor>();
-		do {
-			
 			Autor autor = new Autor(participante, artigo);
 			EventoBD evento = new EventoBD();
 			evento.addAutor(session, autor);
-			autores.add(autor);
-			System.out.print("Quer adicionar mais um artigo? [S|N]: ");
-			opcao = Console.readLine();
-		} while(opcao.compareTo("S") == 0);
 		return autores;
 	}
 	
