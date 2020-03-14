@@ -1,9 +1,7 @@
 package model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -61,13 +59,5 @@ public class Artigo {
 	public void setResumo(String resumo) {
 		this.resumo = resumo;
 	}
-
-//	public Autor getAutor() {
-//		return autor;
-//	}
-//
-//	public void setAutor(Autor autor) {
-//		this.autor = autor;
-//	}
 	
 }

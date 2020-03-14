@@ -1,27 +1,18 @@
 package view;
 
-import java.io.IOException;
 import java.util.HashSet;
-import java.util.Scanner;
 import java.util.Set;
 
-import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-
 import controller.EventoBD;
 import model.Artigo;
 import model.Autor;
 import model.Congresso;
 import model.HibernateUtil;
-import model.Nota;
 import model.Participante;
 
 public class Colecao {
 
-	//public static SessionFactory factory;
 	public static final int ADICIONAR = 1;
 	public static final int CONSULTAR = 2;
 	public static final int REMOVER = 3;
@@ -30,9 +21,6 @@ public class Colecao {
 		System.out.println("Menu de Opcoes:");
 		System.out.println("-------------------");
 		System.out.println("1. Adicionar Congresso");
-		//System.out.println("2. Consultar Congresso");
-		//System.out.println("3. Remover Congresso");
-		//System.out.println("4. Media geral");
 		System.out.println("5. Sair do Programa");
 		System.out.println("-------------------");
 		int opcao = Console.readInt();;
@@ -90,7 +78,7 @@ public class Colecao {
 														 bandeiraCartao, avaliador, congresso);
 		    participantes.add(participante);
 		    EventoBD evento = new EventoBD(); //EventoBD
-			evento.addParticipante(participante);
+			evento.addParticipante(session, participante);
 		    System.out.print("O participante é um autor? [S|N]: ");
 			opcao = Console.readLine();
 			if(opcao.compareTo("S") == 0) {
@@ -128,18 +116,10 @@ public class Colecao {
 		String resumo = Console.readLine();
 		artigo.setTitulo(titulo);
 		artigo.setResumo(resumo);
-		//EventoBD evento = new EventoBD();
-		//evento.addArtigo(session, titulo, resumo);
 		return artigo;
 	}
 	
 	public static void main (String args[]) throws Exception {
-//		try {
-//			factory = new Configuration().configure().buildSessionFactory();
-//		} catch (Throwable ex) {
-//			System.err.println("Failed to create sessionFactory object." + ex);
-//			throw new ExceptionInInitializerError(ex); 
-//		}
 		Session session = HibernateUtil.getSession();
 		try {
 			Colecao ce = new Colecao();
