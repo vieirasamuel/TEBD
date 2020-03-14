@@ -33,6 +33,10 @@ public class Artigo {
 		this.resumo = resumo;
 	}
 	
+	public Artigo(int id) {
+		this.id = id;
+	}
+	
 	public Artigo() {
 	}
 

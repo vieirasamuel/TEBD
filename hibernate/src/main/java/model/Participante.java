@@ -77,6 +77,10 @@ public class Participante {
 		this.congresso = congresso;
 	}
 	
+	public Participante(int id) {
+		this.id = id;
+	}
+	
 	public Participante() {
 	}
 	

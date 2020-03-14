@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import controller.EventoBD;
 import model.Artigo;
 import model.Autor;
+import model.Avaliacao;
 import model.Congresso;
 import model.HibernateUtil;
 import model.Participante;
@@ -14,13 +15,14 @@ import model.Participante;
 public class Colecao {
 
 	public static final int ADICIONAR = 1;
-	public static final int CONSULTAR = 2;
+	public static final int ADICIONAR_AVALIACAO = 2;
 	public static final int REMOVER = 3;
 	
 	public int criaMenuPrincipal(){
 		System.out.println("Menu de Opcoes:");
 		System.out.println("-------------------");
 		System.out.println("1. Adicionar Congresso");
+		System.out.println("2. Adicionar Avaliação");
 		System.out.println("5. Sair do Programa");
 		System.out.println("-------------------");
 		int opcao = Console.readInt();;
@@ -34,7 +36,7 @@ public class Colecao {
 			System.out.println("-------------------");
 			System.out.print("Nome do Congresso:");
 			String nome = Console.readLine();
-			EventoBD evento = new EventoBD(); //EventoBD
+			EventoBD evento = new EventoBD();
 			evento.addCongresso(session, nome);
 			System.out.print("Deseja Adicionar mais um congresso? [S|N]: ");
 			opcao = Console.readLine();
@@ -77,7 +79,7 @@ public class Colecao {
 														 numeroCartao, vencimentoCartao,
 														 bandeiraCartao, avaliador, congresso);
 		    participantes.add(participante);
-		    EventoBD evento = new EventoBD(); //EventoBD
+		    EventoBD evento = new EventoBD();
 			evento.addParticipante(session, participante);
 		    System.out.print("O participante é um autor? [S|N]: ");
 			opcao = Console.readLine();
@@ -108,8 +110,8 @@ public class Colecao {
 	
 	public Artigo addArtigo(Session session) throws Exception {
 		Artigo artigo = new Artigo();
-		System.out.print("Cadastro de Artigo:");
-		System.out.print("-------------------");
+		System.out.println("Cadastro de Artigo:");
+		System.out.println("-------------------");
 		System.out.print("Titulo:");
 		String titulo = Console.readLine();
 		System.out.print("Resumo:");
@@ -117,6 +119,24 @@ public class Colecao {
 		artigo.setTitulo(titulo);
 		artigo.setResumo(resumo);
 		return artigo;
+	}
+	
+	public void addAvaliacao(Session session) throws Exception {
+		System.out.println("Avaliação de Artigo:");
+		System.out.println("-------------------");
+		System.out.print("Digite o ID do Participante:");
+		int idParticipante = Console.readInt();
+		System.out.print("Digite o ID do Artigo:");
+		int idArtigo = Console.readInt();
+		System.out.print("Nota:");
+		String nota = Console.readLine();
+		System.out.print("Comentário:");
+		String comentario = Console.readLine();
+		Participante participante = new Participante(idParticipante);
+		Artigo artigo = new Artigo(idArtigo);
+		Avaliacao avaliacao = new Avaliacao(nota, comentario, artigo, participante);
+	    EventoBD evento = new EventoBD();
+		evento.addAvaliacao(session, avaliacao);
 	}
 	
 	public static void main (String args[]) throws Exception {
@@ -127,6 +147,8 @@ public class Colecao {
 			while((opcao = ce.criaMenuPrincipal()) != 5){
 				if(opcao == Colecao.ADICIONAR) {
 					ce.addCongresso(session);
+				} else if(opcao == Colecao.ADICIONAR_AVALIACAO) {
+					ce.addAvaliacao(session);
 				} else System.out.println("Escolha uma opcao correta.");
 			}
 			session.close();

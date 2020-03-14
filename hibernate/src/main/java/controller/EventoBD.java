@@ -9,6 +9,7 @@ import org.hibernate.Transaction;
 
 import model.Artigo;
 import model.Autor;
+import model.Avaliacao;
 import model.Congresso;
 import model.Participante;
 import view.Colecao;
@@ -59,11 +60,24 @@ public class EventoBD {
 			e.printStackTrace();
 		}
 	}
+	
 	public void addAutor(Session session, Autor autor) {
 		Transaction tx = null;
 		try {
 			tx = session.beginTransaction();
 			session.save(autor);
+			tx.commit();
+		} catch(HibernateException e) {
+			if (tx!=null) tx.rollback();
+			e.printStackTrace();
+		}
+	}
+	
+	public void addAvaliacao(Session session, Avaliacao avaliacao) {
+		Transaction tx = null;
+		try {
+			tx = session.beginTransaction();
+			session.save(avaliacao);
 			tx.commit();
 		} catch(HibernateException e) {
 			if (tx!=null) tx.rollback();
