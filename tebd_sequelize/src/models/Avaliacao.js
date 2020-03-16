@@ -3,7 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 class Avaliacao extends Model {
   static init(sequelize) {
     super.init({
-      nota: DataTypes.STRING,
+      nota: DataTypes.DECIMAL(10,2),
       comentario: DataTypes.INTEGER,
     }, {
       sequelize,

@@ -12,7 +12,7 @@ class Artigo extends Model {
   }
 
   static associate(models){
-    this.hasOne(models.Avaliacao, { foreignKey: 'artigo_id', as: 'avaliacao' });
+    this.hasMany(models.Avaliacao, { foreignKey: 'artigo_id', as: 'avaliacoes' });
     this.belongsToMany(models.Participante, { foreignKey: 'artigo_id', through: 'autor', as: 'participante' })
   }
 

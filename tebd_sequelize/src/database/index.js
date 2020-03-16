@@ -11,10 +11,10 @@ const connection = new Sequelize(dbConfig);
 Artigo.init(connection);
 Congresso.init(connection);
 Participante.init(connection);
-Avaliacao.init(connection);
+Avaliacao.init(connection, connection.models);
 
 Artigo.associate(connection.models);
-Avaliacao.associate(connection.models);
+//Avaliacao.associate(connection.models);
 Congresso.associate(connection.models);
 Participante.associate(connection.models);
 

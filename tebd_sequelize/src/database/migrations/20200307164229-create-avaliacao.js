@@ -24,7 +24,7 @@ module.exports = {
         onDelete: 'RESTRICT',
       },
       nota: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.DECIMAL(10,2),
         allowNull: false,
       },
       comentario: {

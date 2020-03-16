@@ -21,3 +21,16 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+## Java project
+hibernate/bin/
+hibernate/target/
+
+# Eclipse
+.classpath/
+.project/
+.settings/
+
+# Maven
+log/
+target/
