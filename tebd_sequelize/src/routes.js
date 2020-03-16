@@ -5,7 +5,7 @@ const ParticipanteController = require('./controllers/ParticipanteController');
 const AutorController = require('./controllers/AutorController');
 const AvaliacaoController = require('./controllers/AvaliacaoController');
 
-const TesteController = require('./controllers/DWControllers/Import');
+const ImportController = require('./controllers/DWControllers/Import');
 
 
 const routes = express.Router();
@@ -33,7 +33,7 @@ routes.get('/artigo/:artigo_id/avaliacao', AvaliacaoController.artigo);
 routes.get('/participante/:participante_id/avaliacao', AvaliacaoController.participante);
 routes.get('/avaliador/generate', AvaliacaoController.createAvaliacoes);
 
-routes.get('/empresa', TesteController.index);
+routes.get('/import', ImportController.index);
 
 
 

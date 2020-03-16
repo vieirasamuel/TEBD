@@ -14,8 +14,12 @@ const Sequelize = require('../../database').dw;
 
 createTipos = async() => {
   try{
-    await DimensaoTipoParticipante.findOrCreate({where: { tipo_id: 0, tipo_descricao: 'Normal' }});
-    await DimensaoTipoParticipante.findOrCreate({where: { tipo_id: 1, tipo_descricao: 'Avaliador' }});
+    await DimensaoTipoParticipante.create(
+      { tipo_id: 1, tipo_descricao: 'Normal' }
+    );
+    await DimensaoTipoParticipante.create(
+      { tipo_id: 2, tipo_descricao: 'Avaliador' }
+    );
     return 'Tipos importados';
   } catch (error) {
     return error;
@@ -203,7 +207,7 @@ importParticipantes = async () => {
             attributes: ['endereco_id'],
             raw: true,
           });
-          const avaliador = 0;
+          const avaliador = 1;
           await FatoParticipante.findOrCreate({
             where:
             {
@@ -227,13 +231,69 @@ importParticipantes = async () => {
   return added;
 }
 
+sleep = (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 module.exports = {
 
   async index(req,res) {
 
     try {
-      let participantes = await importParticipantes();
-      res.json(participantes);
+
+      let resultados = [];
+
+      const empresa = await DimensaoEmpresa.findAll();
+      if(empresa.length == 0){
+        let empresas = await importEmpresas();
+        resultados.push(empresas);
+        console.log(empresas);
+        await sleep(3000);
+      }
+
+      const endereco = await DimensaoEndereco.findAll();
+      if(endereco.length == 0){
+        let endereco = await importEnderecos();
+        resultados.push(endereco);
+        console.log(endereco);
+        await sleep(3000);
+      }
+
+      const pagamento = await DimensaoPagamento.findAll();
+      if(pagamento.length == 0){
+        let pagamentos = await importPagamentos();
+        resultados.push(pagamentos);
+        console.log(pagamentos);
+        await sleep(3000);
+      }
+
+      const artigo = await DimensaoArtigo.findAll();
+      if(artigo.length == 0){
+        let artigos = await importArtigos();
+        resultados.push(artigos);
+        console.log(artigos);
+        await sleep(3000);
+      }
+
+      const tipo = await DimensaoTipoParticipante.findAll();
+      if(tipo.length == 0){
+        let tipos = await createTipos();
+        resultados.push(tipos);
+        console.log(tipos);
+        await sleep(3000);
+      }
+
+      const participante = await FatoParticipante.findAll();
+      if(participante.length == 0){
+        let participantes = await importParticipantes();
+        resultados.push(participantes);
+        console.log(participantes);
+        await sleep(3000);
+      }
+
+      console.log(resultados);
+
+      res.json('Importação realizada com sucesso');
     } catch (error) {
       res.status(500).json({ msg: error});
     }
