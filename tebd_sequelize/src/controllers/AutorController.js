@@ -1,7 +1,7 @@
 const Artigo = require('../models/Artigo');
 const Participante = require('../models/Participante');
 const Utils = require('../utils');
-const sequelize = require('../database')
+const sequelize = require('../database').source;
 
 module.exports = {
 
