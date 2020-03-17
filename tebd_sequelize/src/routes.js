@@ -5,6 +5,11 @@ const ParticipanteController = require('./controllers/ParticipanteController');
 const AutorController = require('./controllers/AutorController');
 const AvaliacaoController = require('./controllers/AvaliacaoController');
 
+const ImportController = require('./controllers/DWControllers/Import');
+
+const ImportMobileController = require('./controllers/MobileControllers/import');
+
+
 
 const routes = express.Router();
 
@@ -30,6 +35,11 @@ routes.post('/avaliacao/:artigo_id/:participante_id', AvaliacaoController.store)
 routes.get('/artigo/:artigo_id/avaliacao', AvaliacaoController.artigo);
 routes.get('/participante/:participante_id/avaliacao', AvaliacaoController.participante);
 routes.get('/avaliador/generate', AvaliacaoController.createAvaliacoes);
+
+routes.get('/import', ImportController.index);
+
+routes.get('/import/mobile', ImportMobileController.index);
+
 
 
 
