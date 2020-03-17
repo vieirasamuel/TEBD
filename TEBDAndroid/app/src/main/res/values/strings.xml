@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TEBD Android</string>
+    <string name="action_new">Novo</string>
+    <string name="action_update">Editar</string>
+    <string name="action_delete">Apagar</string>
+    <string name="title_activity_disciplina">Disciplina</string>
+</resources>
