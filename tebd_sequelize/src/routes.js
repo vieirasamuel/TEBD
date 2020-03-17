@@ -7,6 +7,9 @@ const AvaliacaoController = require('./controllers/AvaliacaoController');
 
 const ImportController = require('./controllers/DWControllers/Import');
 
+const ImportMobileController = require('./controllers/MobileControllers/import');
+
+
 
 const routes = express.Router();
 
@@ -34,6 +37,9 @@ routes.get('/participante/:participante_id/avaliacao', AvaliacaoController.parti
 routes.get('/avaliador/generate', AvaliacaoController.createAvaliacoes);
 
 routes.get('/import', ImportController.index);
+
+routes.get('/import/mobile', ImportMobileController.index);
+
 
 
 

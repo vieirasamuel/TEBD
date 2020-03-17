@@ -228,7 +228,6 @@ importParticipantes = async () => {
     console.log(error.original.sqlMessage);
     return 'Erro';
   } 
-  return added;
 }
 
 sleep = (ms) => {
