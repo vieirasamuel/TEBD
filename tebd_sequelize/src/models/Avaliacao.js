@@ -12,8 +12,8 @@ class Avaliacao extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Artigo, { foreignKey: 'fk_artigo', as: 'artigo' });
-    this.belongsTo(models.Participante, { foreignKey: 'fk_participante', as: 'participante' });
+    this.belongsTo(models.Artigo, { foreignKey: 'artigo_id', as: 'artigo' });
+    this.belongsTo(models.Participante, { foreignKey: 'participante_id', as: 'participante' });
   }
 }
 
